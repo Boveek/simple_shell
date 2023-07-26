@@ -42,8 +42,6 @@ int main(int argc, char *argv[])
 		else
 		{
 			pipe_in = true;
-			process(argc, argv);
-			continue;
 		}
 		line_count = getline(&input_ptr, &t, stdin);
 		if (line_count == -1)
