@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	size_t t = 0;
 	char **env = environ;
 	ssize_t line_count;
-	int i, p, num_splited = 0, bufflen, status, waitget, result;
+	int i, p, num_splited = 0, bufflen, status, waitget, result, w;
 	char *v = "exit", *e = "env", *chd = "cd", buff[1024], prompt[13] = "Simple_shell:", promptbuf[1200], *unenv = "unsetenv";
 	bool pipe_in = false;
 
@@ -42,7 +42,10 @@ int main(int argc, char *argv[])
 		else
 		{
 			pipe_in = true;
-			process(argc, argv);
+			if ((w = process(argc, argv)) != 0)
+			{
+				return (-1);
+			}
 			return (0);
 		}
 		line_count = getline(&input_ptr, &t, stdin);

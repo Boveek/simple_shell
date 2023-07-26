@@ -214,5 +214,10 @@ int process(int argc, char *argv[])
 		input_ptr_copy = NULL;
 		fflush(stdout);
 	}
+	if (line_count == -1)
+	{
+		input_ptr = NULL;
+		return (-1);
+	}
 	return (0);
 }
