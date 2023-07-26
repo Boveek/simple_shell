@@ -42,14 +42,12 @@ int main(int argc, char *argv[])
 		else
 		{
 			pipe_in = true;
-			process(argc, argv);
-			break;
 		}
 		line_count = getline(&input_ptr, &t, stdin);
 		if (line_count == -1)
 		{
 			input_ptr = NULL;
-			break;
+			return (-1);
 		}
 		if (line_count <= 1)
 		{
