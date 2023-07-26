@@ -43,7 +43,8 @@ int main(int argc, char *argv[])
 		{
 			pipe_in = true;
 		}
-		line_count = getline(&input_ptr, &t, stdin);
+		while ((line_count = getline(&input_ptr, &t, stdin)) != -1)
+		{
 		if (line_count == -1)
 		{
 			input_ptr = NULL;
@@ -230,6 +231,7 @@ int main(int argc, char *argv[])
 		num_splited = 0;
 		free(input_ptr);
 		input_ptr = NULL;
+		}
 		input_ptr_copy = NULL;
 		fflush(stdout);
 	}
