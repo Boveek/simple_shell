@@ -38,13 +38,12 @@ int main(int argc, char *argv[])
 		my_strcpy(promptbuf + 13 + bufflen, dol);
 		write(STDOUT_FILENO, promptbuf, my_strlen(promptbuf));
 		fflush(stdout);
-		line_count = getline(&input_ptr, &t, stdin);
 		}
 		else
 		{
 			pipe_in = true;
-			line_count = getline(&input_ptr, &t, stdin);
 		}
+		line_count = getline(&input_ptr, &t, stdin);
 		if (line_count == -1)
 		{
 			input_ptr = NULL;
@@ -221,7 +220,8 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				fprintf(stderr, "%s: 1: %s: not found\n", err, ev[0]);
+				/**fprintf(stderr, "%s: 1: %s: not found\n", err, ev[0]);*/
+				fprintf(stderr, "%s: No such file or directory\n", err);
 			}
 		}
 		for (i = 0; ev[i] != NULL; i++)
