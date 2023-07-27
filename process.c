@@ -1,10 +1,10 @@
 #include "main.h"
 #include <stdbool.h>
 /**
- *
- *
- *
- *
+ * process - Entry point
+ * @argc: argument count
+ * @argv: argument vector
+ * Return: 0 on success
  */
 int process(int argc, char *argv[])
 {
@@ -213,6 +213,11 @@ int process(int argc, char *argv[])
 		input_ptr = NULL;
 		input_ptr_copy = NULL;
 		fflush(stdout);
+	}
+	if (line_count == -1)
+	{
+		input_ptr = NULL;
+		return (-1);
 	}
 	return (0);
 }

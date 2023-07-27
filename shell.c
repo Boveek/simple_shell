@@ -1,10 +1,10 @@
 #include "main.h"
 #include <stdbool.h>
 /**
- *
- *
- *
- *
+ * main - This is the program entry point
+ * @argc: argument count
+ * @argv: argument vector
+ * Return: 0 on success
  */
 int main(int argc, char *argv[])
 {
@@ -42,14 +42,12 @@ int main(int argc, char *argv[])
 		else
 		{
 			pipe_in = true;
-			process(argc, argv);
-			break;
 		}
 		line_count = getline(&input_ptr, &t, stdin);
 		if (line_count == -1)
 		{
 			input_ptr = NULL;
-			break;
+			return (-1);
 		}
 		if (line_count <= 1)
 		{
@@ -222,7 +220,8 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				fprintf(stderr, "%s: 1: %s: not found\n", err, ev[0]);
+				/**fprintf(stderr, "%s: 1: %s: not found\n", err, ev[0]);*/
+				fprintf(stderr, "%s: No such file or directory\n", err);
 			}
 		}
 		for (i = 0; ev[i] != NULL; i++)
