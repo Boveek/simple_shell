@@ -1,12 +1,5 @@
-#include <stdlib.h>
 #include "main.h"
 
-/**
- * exit_but - function that exits a shell process
- * @res: a double pointer to a string
- *
- * Return: void.
- */
 void exit_but(char **res)
 {
 	int status;
@@ -18,5 +11,5 @@ void exit_but(char **res)
 	}
 
 	else
-		exit(0);
+		 exit(0);
 }
