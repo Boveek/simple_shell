@@ -1,10 +1,10 @@
 #include "main.h"
 #include <stdbool.h>
 /**
- *
- *
- *
- *
+ * process - Entry point
+ * @argc: argument count
+ * @argv: argument vector
+ * Return: 0 on success
  */
 int process(int argc, char *argv[])
 {

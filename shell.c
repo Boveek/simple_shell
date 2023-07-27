@@ -1,10 +1,10 @@
 #include "main.h"
 #include <stdbool.h>
 /**
- *
- *
- *
- *
+ * main - This is the program entry point
+ * @argc: argument count
+ * @argv: argument vector
+ * Return: 0 on success
  */
 int main(int argc, char *argv[])
 {
