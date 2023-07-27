@@ -9,43 +9,14 @@
  */
 void exit_but(char **res)
 {
-	int n, i, len;
+	int status;
 
 	if (res[1])
 	{
-		len = my_strlen(res[1]);
-		n = my_atoi(res[1]);
-		if (n)
-		{
-		for (i = 0; res[1][i] != '\0'; i++)
-		{
-			if (res[1][i] >= '0' && res[1][i] <= '9')
-			{
-				if (i == len - 1)
-				{
-					free(res[0]);
-					free(res[1]);
-					free(res);
-					exit(n);
-				}
-				continue;
-			}
-			else
-			{
-				perror("error: exit takes only integer args");
-				free(res[0]);
-				free(res[1]);
-				free(res);
-				exit(2);
-			}
-		}
-		}
+		status = atoi(res[1]);
+		exit(status);
 	}
 
 	else
-	{
-		free(res[0]);
-		free(res);
-		exit(2);
-	}
+		exit(0);
 }
