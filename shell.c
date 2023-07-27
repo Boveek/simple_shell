@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	size_t t = 0;
 	char **env = environ;
 	ssize_t line_count;
-	int i, p, num_splited = 0, bufflen, status, waitget;
+	int i, p, num_splited = 0, bufflen, status, waitget, result;
 	char *v = "exit", *e = "env", *chd = "cd", buff[1024], prompt[13] = "Simple_shell:", promptbuf[1200], *unenv = "unsetenv";
 	bool pipe_in = false;
 
@@ -23,13 +23,13 @@ int main(int argc, char *argv[])
 	err = argv[0];
 	while (1 && !pipe_in)
 	{
-/**		result = fflush(stdout);
+		result = fflush(stdout);
 		if (result != 0)
 		{
 			perror("Error (flushing)");
 			return (-1);
 		}
-*/		if (isatty(STDIN_FILENO) == 1)
+		if (isatty(STDIN_FILENO) == 1)
 		{
 		getcwd(buff, sizeof(buff));
 		bufflen = my_strlen(buff);
