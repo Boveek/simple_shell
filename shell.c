@@ -14,14 +14,15 @@ int main(int argc, char *argv[])
 	ssize_t line_count;
 	int i, p, num_splited = 0, bufflen, status, waitget, result;
 	char *v = "exit", *e = "env", *chd = "cd", buff[1024], prompt[13] = "Simple_shell:", promptbuf[1200], *unenv = "unsetenv";
-	bool pipe_in = false;
+/**	bool pipe_in = false;*/
+	bool pipe_in = !isatty(STDIN_FILENO);
 
 	pid_t pq;
 
 	(void)argc;
 
 	err = argv[0];
-	while (1 && !pipe_in)
+	while (1)
 	{
 		result = fflush(stdout);
 		if (result != 0)
@@ -29,7 +30,12 @@ int main(int argc, char *argv[])
 			perror("Error (flushing)");
 			return (-1);
 		}
-		if (isatty(STDIN_FILENO) == 1)
+		if (pipe_in)
+		{
+			line_count = getline(&input_ptr, &t, stdin);
+		}
+		else
+/**		if (isatty(STDIN_FILENO) == 1)*/
 		{
 		getcwd(buff, sizeof(buff));
 		bufflen = my_strlen(buff);
@@ -38,13 +44,14 @@ int main(int argc, char *argv[])
 		my_strcpy(promptbuf + 13 + bufflen, dol);
 		write(STDOUT_FILENO, promptbuf, my_strlen(promptbuf));
 		fflush(stdout);
+		line_count = getline(&input_ptr, &t, stdin);
 		}
-		else
+/**		else
 		{
 			pipe_in = true;
+			line_count = getline(&input_ptr, &t, stdin);
 		}
-		line_count = getline(&input_ptr, &t, stdin);
-		if (line_count == -1)
+*/		if (line_count == -1)
 		{
 			input_ptr = NULL;
 			return (-1);
