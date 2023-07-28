@@ -14,7 +14,7 @@ void exit_but(char **res)
 	if (res[1])
 	{
 		len = my_strlen(res[1]);
-		n = my_atoi(res[1]);
+		n = atoi(res[1]);
 		if (n)
 		{
 		for (i = 0; res[1][i] != '\0'; i++)
