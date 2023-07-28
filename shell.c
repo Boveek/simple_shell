@@ -14,14 +14,14 @@ int main(int argc, char *argv[])
 	ssize_t line_count;
 	int i, p, num_splited = 0, bufflen, status, waitget, result;
 	char *v = "exit", *e = "env", *chd = "cd", buff[1024], prompt[13] = "Simple_shell:", promptbuf[1200], *unenv = "unsetenv";
-	/*bool pipe_in;*/
+	bool pipe_in = false;
 
 	pid_t pq;
 
 	(void)argc;
 
 	err = argv[0];
-	while (1)
+	while (1 && !pipe_in)
 	{
 		result = fflush(stdout);
 		if (result != 0)
@@ -38,13 +38,10 @@ int main(int argc, char *argv[])
 		my_strcpy(promptbuf + 13 + bufflen, dol);
 		write(STDOUT_FILENO, promptbuf, my_strlen(promptbuf));
 		fflush(stdout);
-		line_count = getline(&input_ptr, &t, stdin);
 		}
 		else
-		{
-			/*pipe_in = true;*/
-			line_count = getline(&input_ptr, &t, stdin);
-		}
+			pipe_in = true;
+		line_count = getline(&input_ptr, &t, stdin);
 		if (line_count == -1)
 		{
 			input_ptr = NULL;
