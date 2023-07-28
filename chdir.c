@@ -9,40 +9,41 @@
 void cd(char *dir)
 {
 	int cnt;
-	char pwd_buff[PATH_BUF];
+	char *pwd, pwd_buff[PATH_BUF];
 
 	if (dir == NULL || strcmp(dir, "$HOME") == 0)
 	{
-		cnt = chdir(getenv("HOME"));
+		chdir("/root");
+		return;
 	}
-
-
-	else if (my_strlen(dir) == 1 && dir[0] == '-')
+	if (my_strlen(dir) == 1 && dir[0] == '-')
 	{
-		cnt = chdir(getenv("OLDPWD"));
-		getcwd(pwd_buff, PATH_BUF);
-		write(1, pwd_buff, strlen(pwd_buff));
+		pwd = _getenv("OLDPWD");
+		if (pwd)
+		{
+			cnt = chdir((const char *)(pwd));
+			if (cnt != 0)
+			{
+				perror("Error");
+				return;
+			}
+			setenv("OLDPWD", _getenv("PWD"), 1);
+			setenv("PWD", getcwd(pwd_buff, sizeof(pwd_buff)), 1);
+		}
+		write(1, _getenv("PWD"), my_strlen(_getenv("PWD")));
 		write(1, "\n", 1);
+		setenv("OLDPWD", _getenv("PWD"), 1);
+		setenv("PWD", getcwd(pwd_buff, sizeof(pwd_buff)), 1);
+		return;
 	}
-
 	else
 	{
 		cnt = chdir((const char *)(dir));
-	}
-
-	if (cnt == -1)
-	{
-		perror("Error");
-	}
-
-	else if (cnt != -1)
-	{
-		getcwd(pwd_buff, PATH_BUF);
-		setenv("OLDPWD", getenv("PWD"), 1);
-		setenv("PWD", pwd_buff, 1);
-	}
-	
-}
-
-
-
+		if (cnt != 0)
+		{
+			perror("Error");
+			return;
+		}
+		setenv("OLDPWD", _getenv("PWD"), 1);
+		setenv("PWD", getcwd(pwd_buff, sizeof(pwd_buff)), 1);
+	}}
