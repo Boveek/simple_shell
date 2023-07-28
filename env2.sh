@@ -2,7 +2,7 @@
 
 ################################################################################
 # Description for the intranet check (one line, support Markdown syntax)
-# Execute `/bin/ls` 3 times
+# Execute `env`
 
 ################################################################################
 # The variable 'compare_with_sh' IS OPTIONNAL
@@ -41,6 +41,8 @@ shell_input="env"
 # Return value: Discarded
 function check_setup()
 {
+	current_env=$(env)
+
 	return 0
 }
 
@@ -80,7 +82,23 @@ function sh_setup()
 #     1  -> Check fails
 function check_callback()
 {
-	status=$1
+	let status=0
+
+	# Remove environment variables and set by valgrind from student output
+	content=`$CAT "$OUTPUTFILE"`
+	content=`$ECHO "$content" | $GREP -v -e "^GLIBCPP_FORCE_NEW="`
+	content=`$ECHO "$content" | $GREP -v -e "^GLIBCXX_FORCE_NEW="`
+	content=`$ECHO "$content" | $GREP -v -e "^LD_PRELOAD="`
+	content=`$ECHO "$content" | $GREP -v -e "^LD_LIBRARY_PATH="`
+	content=`$ECHO "$content" | $GREP -v -e "^_="`
+	$ECHO "$content" > $OUTPUTFILE
+
+	# Remove "_" environment variable from expected output
+	content=`$CAT "$EXPECTED_OUTPUTFILE"`
+	content=`$ECHO "$content" | $GREP -v -e "^_="`
+	$ECHO "$content" > $EXPECTED_OUTPUTFILE
+
+	check_diff
 
 	return $status
 }

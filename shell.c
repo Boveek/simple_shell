@@ -206,8 +206,7 @@ int main(int argc, char *argv[])
 						perror("execve: ");
 						free(path_get);
 						return (-1);
-					}
-					exit(0);
+					}	
 				}
 				if (waitpid(pq, &status, 0) == -1)
 				{

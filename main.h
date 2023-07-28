@@ -23,6 +23,7 @@ int my_strcmp(char *s1, char *s2);
 int my_strncmp(char *s1, char *s2, size_t n);
 char *my_strdup(char *str);
 void _getenv2(char **env);
+void _getenv3(char **env);
 ssize_t _getline(char **buff, size_t *n);
 void exit_but(char **res);
 int my_atoi(char *s);
