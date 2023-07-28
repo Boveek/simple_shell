@@ -8,12 +8,12 @@
  */
 int main(int argc, char *argv[])
 {
-	char *input_ptr = NULL, *splited, *input_ptr_copy = NULL, *path_get, dol[3] = "$ ", *setev = "setenv", **ev, *err;
+	char *input_ptr = NULL, *splited, *input_ptr_copy = NULL, *path_get, /*dol[3] = "$ ",*/ *setev = "setenv", **ev, *err;
 	size_t t = 0;
 	char **env = environ;
 	ssize_t line_count;
-	int i, p, num_splited = 0, bufflen, status, waitget, result;
-	char *v = "exit", *e = "env", *chd = "cd", buff[1024], prompt[13] = "Simple_shell:", promptbuf[1200], *unenv = "unsetenv";
+	int i, p, num_splited = 0, /*bufflen,*/ status, waitget, result;
+	char *v = "exit", *e = "env", *chd = "cd", /*buff[1024],*/ prompt[15] = "Simple_shell:$ ", /*promptbuf[1200],*/ *unenv = "unsetenv";
 	bool pipe_in = false;
 
 	pid_t pq;
@@ -31,12 +31,12 @@ int main(int argc, char *argv[])
 		}
 		if (isatty(STDIN_FILENO) == 1)
 		{
-		getcwd(buff, sizeof(buff));
+		/*getcwd(buff, sizeof(buff));
 		bufflen = my_strlen(buff);
 		my_strcpy(promptbuf, prompt);
 		my_strcpy(promptbuf + 13, buff);
-		my_strcpy(promptbuf + 13 + bufflen, dol);
-		write(STDOUT_FILENO, promptbuf, my_strlen(promptbuf));
+		my_strcpy(promptbuf + 13 + bufflen, dol);*/
+		write(STDOUT_FILENO, prompt, my_strlen(prompt));
 		fflush(stdout);
 		}
 		else
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 			continue;
 		}
 		input_ptr[line_count - 1] = '\0';
-		input_ptr_copy = my_strdup(input_ptr);
+		input_ptr_copy = strdup(input_ptr);
 		if (input_ptr_copy == NULL)
 			return (-1);
 		splited = _strtok(input_ptr, ' ');
