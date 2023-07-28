@@ -21,9 +21,7 @@
 # as follows: "echo $shell_input | ./hsh"
 #
 # It can be empty and multiline
-shell_input="/bin/ls
-/bin/ls
-/bin/ls"
+shell_input="exit"
 
 ################################################################################
 # The variable 'shell_params' IS OPTIONNAL

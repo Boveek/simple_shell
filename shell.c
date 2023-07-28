@@ -181,7 +181,6 @@ int main(int argc, char *argv[])
 					return (-1);
 				}
 				free(path_get);
-				exit(0);
 			}
 			if ((waitget = wait(&status)) == -1)
                         {
@@ -226,8 +225,12 @@ int main(int argc, char *argv[])
 			}
 		}
 		for (i = 0; ev[i] != NULL; i++)
+		{
 			free(ev[i]);
+			ev[i] = NULL;
+		}
 		free(ev);
+		ev = NULL;
 		free(input_ptr_copy);
 		num_splited = 0;
 		free(input_ptr);
