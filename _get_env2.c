@@ -3,8 +3,8 @@
 
 /**
  * _getenv2 - a function that print the enviroment of the current shell
- *
- * Return: void.
+ * @env: environment
+ * Return: void
  */
 void _getenv2(char **env)
 {

@@ -1,5 +1,9 @@
 #include "main.h"
-
+/**
+ * exit_but - Entry point
+ * @res: argument
+ * Return: nothing
+ */
 void exit_but(char **res)
 {
 	int status, i;
@@ -14,7 +18,7 @@ void exit_but(char **res)
 		}
 		free(res);
 		exit(status);
-	}
+		}
 
 	else
 	{
