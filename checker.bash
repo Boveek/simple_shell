@@ -5,7 +5,7 @@
 ################################################################################
 R=$RANDOM
 
-TMP_DIR="/tmp"
+TMP_DIR="/simple_shell"
 COMMANDFILE="$TMP_DIR/hbtn_checker_command_$R"
 COMMANDFILE_REAL_SHELL="$TMP_DIR/hbtn_checker_command_real_shell_$R"
 STATUS="$TMP_DIR/hbtn_checker_status_$R"
@@ -147,7 +147,6 @@ function cleanup()
 	$RM -f $OUTPUTFILE
 	$RM -f $ERROR_OUTPUTFILE
 	$RM -f $CHECK_OUTPUTFILE
-	$RM -f $VALGRIND_OUTPUTFILE
 	$RM -f $LTRACE_OUTPUTFILE
 	$RM -f $EXPECTED_STATUS
 	$RM -f $EXPECTED_OUTPUTFILE
@@ -195,6 +194,7 @@ function print_diff()
 	$ECHO -n "(status)["
 	$CAT $EXPECTED_STATUS
 	$ECHO -e "]\n"
+
 
 	$ECHO "Environment:"
 	$CAT $ENV_TMP_FILE | $GREP -v "LS_COLORS"
